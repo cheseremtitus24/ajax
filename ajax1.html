@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Ajax old Version</title>
+  </head>
+  <body>
+    <button id='button' type="button" name="button">Get Text File</button>
+    <p id="data"></p>
+    <script type="text/javascript">
+      //create an event listener
+      document.getElementById('button').addEventListener('click',loadText);
+
+      // Function Definition
+      function loadText(){
+        //Create XHR object
+        var xhr = new XMLHttpRequest();
+        // open - you can use to either capture a local/remote file - you have an option to pass in whether the
+        // request will be asynchronous by passing the third parameter true;
+        xhr.open('GET','sample.txt',true);
+        xhr.onload = function()
+        {
+          /*
+          HTTP Statuses
+          200 "ok"
+          403 "forbidden"
+          404 "Not Found"
+          */
+
+          if(this.status == 200)
+          {
+
+            document.getElementById('data').innerHTML=this.responseText;
+            console.log(this.responseText);
+          }
+          else if (this.status == 400){
+            console.log("The resource was not found")
+
+          }
+        }
+        // Must send the request
+        xhr.send();
+      }
+    </script>
+  </body>
+</html>
